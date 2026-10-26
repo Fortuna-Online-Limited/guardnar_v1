@@ -1,0 +1,2 @@
+# SPA fallback — 所有路由交给 index.html, React 路由处理旧路径重定向与 404
+/*    /index.html   200
