@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight, Quote, Droplets, Flame, Feather, Home, ShieldCheck, HardHat } from 'lucide-react';
+import { ChevronRight, Quote, Droplets, Flame, Feather, Home, ShieldCheck, HardHat, type LucideIcon } from 'lucide-react';
 import { useLang } from '@/i18n/LanguageContext';
 import { aboutParagraphs, corporateSpirit, stats, productLines } from '@/data/content';
 import { useReveal } from '@/hooks/useReveal';
 import { t } from '@/data/content';
 
-const iconMap: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
+const iconMap: Record<string, LucideIcon> = {
   Droplets,
   HardHat,
   Flame,

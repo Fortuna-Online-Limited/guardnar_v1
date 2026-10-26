@@ -174,6 +174,12 @@ export default function ProductDetail() {
         return;
       }
 
+      if (!supabase) {
+        setNotFound(true);
+        setLoading(false);
+        return;
+      }
+
       const { data, error } = await supabase
         .from('products')
         .select('id, title, sku, description, quantity, price, photo_url, category')

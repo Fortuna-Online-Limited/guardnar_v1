@@ -33,11 +33,16 @@ export default function Category() {
   const [productsError, setProductsError] = useState(false);
 
   useEffect(() => {
-    const categoryNames = slug ? categoryBySlug[slug] : undefined;
-    if (!cat || !categoryNames) return;
+    if (!cat || !slug) return;
+    const categoryNames = categoryBySlug[slug];
+    if (!categoryNames || !supabase) {
+      setProductsError(true);
+      return;
+    }
+    const client = supabase;
 
     async function loadProducts() {
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('products')
         .select('id, title, sku, description, quantity, price, photo_url')
         .in('category', categoryNames)

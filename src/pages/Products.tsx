@@ -38,6 +38,12 @@ export default function Products() {
     let active = true;
 
     async function loadProducts() {
+      if (!supabase) {
+        setError(lang === 'zh' ? '产品资料暂时无法加载，请稍后再试。' : 'Product data could not be loaded. Please try again later.');
+        setLoading(false);
+        return;
+      }
+
       const { data, error: queryError } = await supabase
         .from('products')
         .select('id, title, sku, description, quantity, price, photo_url, category')
