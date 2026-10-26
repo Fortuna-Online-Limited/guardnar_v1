@@ -181,7 +181,7 @@ export default function ProductDetail() {
       }
 
       const { data, error } = await supabase
-        .from('products')
+        .from('_guardnar_products')
         .select('id, title, sku, description, quantity, price, photo_url, category')
         .eq('sku', sku)
         .maybeSingle();

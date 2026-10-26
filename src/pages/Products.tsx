@@ -45,7 +45,7 @@ export default function Products() {
       }
 
       const { data, error: queryError } = await supabase
-        .from('products')
+        .from('_guardnar_products')
         .select('id, title, sku, description, quantity, price, photo_url, category')
         .order('sku');
 

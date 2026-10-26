@@ -43,7 +43,7 @@ export default function Category() {
 
     async function loadProducts() {
       const { data, error } = await client
-        .from('products')
+        .from('_guardnar_products')
         .select('id, title, sku, description, quantity, price, photo_url')
         .in('category', categoryNames)
         .order('sku');
