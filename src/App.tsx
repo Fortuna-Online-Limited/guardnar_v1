@@ -21,7 +21,7 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-ink-950 text-steel-100 antialiased">
+    <div className="relative min-h-screen bg-white text-ink-800 antialiased">
       <ScrollToTop />
       <Navbar />
       <main>

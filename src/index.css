@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -16,8 +16,8 @@ html {
 }
 
 body {
-  background-color: #08090d;
-  color: #e8edf5;
+  background-color: #ffffff;
+  color: #1a1e29;
   font-family: 'Sora', 'Noto Sans SC', system-ui, sans-serif;
   overflow-x: hidden;
 }
@@ -31,14 +31,14 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0c0e14;
+  background: #f4f6fa;
 }
 ::-webkit-scrollbar-thumb {
-  background: #272d3c;
+  background: #aabbd8;
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a4257;
+  background: #7a93bf;
 }
 
 @layer utilities {
