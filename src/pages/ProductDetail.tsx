@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ChevronRight, Package, Tag, Boxes, Warehouse, ImageIcon } from 'lucide-react';
 import { useLang } from '@/i18n/LanguageContext';
 import { supabase } from '@/lib/supabase';
-import { useReveal } from '@/hooks/useReveal';
+import { motion, staggerContainer, staggerItem } from '@/components/Motion';
 
 type Product = {
   id: string;
@@ -29,14 +29,18 @@ const categoryLabels: Record<string, { zh: string; en: string; slug: string }> =
 };
 
 function ProductView({ product, lang }: { product: Product; lang: 'zh' | 'en' }) {
-  const { ref, shown } = useReveal();
   const [imgError, setImgError] = useState(false);
   const cat = categoryLabels[product.category] ?? Object.values(categoryLabels).find((c) => c.zh === product.category);
 
   return (
     <div className="pt-24">
       <section className="max-w-6xl mx-auto px-6 py-12">
-        <nav className="flex items-center gap-2 text-sm text-steel-500 mb-8 flex-wrap">
+        <motion.nav
+          className="flex items-center gap-2 text-sm text-steel-500 mb-8 flex-wrap"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+        >
           <Link to="/" className="hover:text-ember-600 transition-colors">
             {lang === 'zh' ? '首页' : 'Home'}
           </Link>
@@ -54,42 +58,54 @@ function ProductView({ product, lang }: { product: Product; lang: 'zh' | 'en' })
           )}
           <ChevronRight className="h-3.5 w-3.5" />
           <span className="text-steel-300">{product.sku}</span>
-        </nav>
+        </motion.nav>
 
-        <Link
-          to={cat ? `/category/${cat.slug}` : '/products'}
-          className="inline-flex items-center gap-2 text-sm text-steel-600 hover:text-ember-600 transition-colors mb-8"
+        <motion.div
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
         >
-          <ArrowLeft className="h-4 w-4" />
-          {lang === 'zh' ? '返回列表' : 'Back to list'}
-        </Link>
+          <Link
+            to={cat ? `/category/${cat.slug}` : '/products'}
+            className="inline-flex items-center gap-2 text-sm text-steel-600 hover:text-ember-600 transition-colors mb-8"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {lang === 'zh' ? '返回列表' : 'Back to list'}
+          </Link>
+        </motion.div>
 
-        <div
-          ref={ref}
-          className={`grid lg:grid-cols-2 gap-12 transition-all duration-700 ${
-            shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div
+          className="grid lg:grid-cols-2 gap-12"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="shown"
         >
-          <div className="relative overflow-hidden rounded-3xl bg-ink-900 border border-white/5 aspect-square">
+          <motion.div
+            variants={staggerItem}
+            className="relative overflow-hidden rounded-3xl bg-ink-900 border border-white/5 aspect-square"
+          >
             {imgError ? (
               <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-steel-600">
                 <ImageIcon className="h-12 w-12" strokeWidth={1.2} />
                 <span className="text-sm">{lang === 'zh' ? '图片暂不可用' : 'Image unavailable'}</span>
               </div>
             ) : (
-              <img
+              <motion.img
                 src={product.photo_url}
                 alt={product.title}
                 className="w-full h-full object-cover"
+                initial={{ scale: 1.08 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 onError={() => setImgError(true)}
               />
             )}
             <span className="absolute top-4 left-4 rounded-full bg-ink-950/80 border border-white/10 px-3 py-1 text-xs text-steel-200">
               {product.sku}
             </span>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col">
+          <motion.div variants={staggerItem} className="flex flex-col">
             {cat && (
               <span className="text-xs tracking-[0.2em] uppercase text-ember-400 font-500">
                 {lang === 'zh' ? cat.zh : cat.en}
@@ -150,8 +166,8 @@ function ProductView({ product, lang }: { product: Product; lang: 'zh' | 'en' })
                 </Link>
               )}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
     </div>
   );

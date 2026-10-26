@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ChevronRight, Package } from 'lucide-react';
 import { useLang } from '@/i18n/LanguageContext';
 import { categories } from '@/data/content';
-import { useReveal } from '@/hooks/useReveal';
+import { Reveal, motion, fadeUp, fadeIn, staggerContainer, staggerItem } from '@/components/Motion';
 import { supabase } from '@/lib/supabase';
 
 type Product = {
@@ -28,7 +28,6 @@ export default function Category() {
   const { slug } = useParams<{ slug: string }>();
   const cat = categories.find((c) => c.slug === slug);
   const { lang } = useLang();
-  const { ref, shown } = useReveal();
   const [products, setProducts] = useState<Product[]>([]);
   const [productsError, setProductsError] = useState(false);
 
@@ -87,40 +86,29 @@ export default function Category() {
           <span className="text-steel-700">{lang === 'zh' ? cat.labelZh : cat.labelEn}</span>
         </nav>
 
-        <div
-          ref={ref}
-          className={`mb-8 transition-all duration-700 ${
-            shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
+        <Reveal variants={fadeUp} className="mb-8">
           <span className="text-xs tracking-[0.2em] uppercase text-ember-400 font-500">
             {cat.labelEn}
           </span>
           <h1 className="mt-4 font-display text-4xl sm:text-5xl font-700 tracking-tight text-ink-900">
             {lang === 'zh' ? cat.labelZh : cat.labelEn}
           </h1>
-        </div>
+        </Reveal>
 
-        <div
-          className={`relative rounded-2xl overflow-hidden mb-10 transition-all duration-700 ${
-            shown ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
+        <Reveal variants={fadeIn} delay={0.1} className="relative rounded-2xl overflow-hidden mb-10">
           <img
             src={cat.image}
             alt={lang === 'zh' ? cat.labelZh : cat.labelEn}
             className="w-full h-56 sm:h-72 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink-950/60 to-transparent" />
-        </div>
+        </Reveal>
 
-        <p
-          className={`text-base sm:text-lg text-steel-700 leading-[1.85] transition-all duration-700 ${
-            shown ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          {lang === 'zh' ? cat.description.zh : cat.description.en}
-        </p>
+        <Reveal variants={fadeIn} delay={0.2}>
+          <p className="text-base sm:text-lg text-steel-700 leading-[1.85]">
+            {lang === 'zh' ? cat.description.zh : cat.description.en}
+          </p>
+        </Reveal>
 
         <div className="mt-16 pt-10 border-t border-ink-200">
           <div className="flex items-center justify-between gap-4 mb-6">
@@ -138,24 +126,37 @@ export default function Category() {
             </p>
           )}
           {!productsError && products.length > 0 && (
-            <div className="grid sm:grid-cols-2 gap-5 mb-16">
+            <motion.div
+              className="grid sm:grid-cols-2 gap-5 mb-16"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="shown"
+              viewport={{ once: true, margin: '0px 0px -80px 0px' }}
+            >
               {products.map((product) => (
-                <Link to={`/product/${product.sku}`} key={product.sku} className="overflow-hidden rounded-2xl bg-ink-800/60 border border-white/5 hover:border-ember-500/30 transition-all duration-500 hover:-translate-y-1 block">
-                  <div className="flex gap-4 p-4">
-                    <img src={product.photo_url} alt={product.title} className="h-24 w-24 shrink-0 rounded-xl object-cover bg-ink-900" 
-                      onError={(e) => { e.currentTarget.style.opacity = '0'; }} />
-                    <div className="min-w-0">
-                      <div className="flex items-start justify-between gap-3">
-                        <h3 className="font-display text-base font-600 text-white leading-snug">{product.title}</h3>
-                        <span className="text-ember-400 text-sm font-600 whitespace-nowrap">¥{product.price}</span>
+                <motion.div
+                  key={product.sku}
+                  variants={staggerItem}
+                  whileHover={{ y: -6 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <Link to={`/product/${product.sku}`} className="overflow-hidden rounded-2xl bg-ink-800/60 border border-white/5 hover:border-ember-500/30 transition-colors duration-500 block">
+                    <div className="flex gap-4 p-4">
+                      <img src={product.photo_url} alt={product.title} className="h-24 w-24 shrink-0 rounded-xl object-cover bg-ink-900"
+                        onError={(e) => { e.currentTarget.style.opacity = '0'; }} />
+                      <div className="min-w-0">
+                        <div className="flex items-start justify-between gap-3">
+                          <h3 className="font-display text-base font-600 text-white leading-snug">{product.title}</h3>
+                          <span className="text-ember-400 text-sm font-600 whitespace-nowrap">¥{product.price}</span>
+                        </div>
+                        <p className="mt-2 text-xs text-steel-400">{product.sku} · {lang === 'zh' ? '数量' : 'Qty'}: {product.quantity}</p>
+                        <p className="mt-2 text-xs text-steel-500 leading-relaxed line-clamp-2">{product.description}</p>
                       </div>
-                      <p className="mt-2 text-xs text-steel-400">{product.sku} · {lang === 'zh' ? '数量' : 'Qty'}: {product.quantity}</p>
-                      <p className="mt-2 text-xs text-steel-500 leading-relaxed line-clamp-2">{product.description}</p>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
         </div>
 
