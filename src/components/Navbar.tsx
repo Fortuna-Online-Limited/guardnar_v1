@@ -39,9 +39,6 @@ export default function Navbar() {
             alt="Guardnar"
             className="h-12 w-24 rounded-md object-contain"
           />
-          <span className="font-display text-xl font-700 tracking-tight text-white">
-            Guard<span className="text-ember-400">nar</span>
-          </span>
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">
