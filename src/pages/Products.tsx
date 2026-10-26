@@ -79,11 +79,11 @@ export default function Products() {
     <div className="pt-24">
       <section className="max-w-7xl mx-auto px-6 py-12">
         <nav className="flex items-center gap-2 text-sm text-steel-500 mb-8">
-          <Link to="/" className="hover:text-white transition-colors">
+          <Link to="/" className="hover:text-ember-600 transition-colors">
             {lang === 'zh' ? '首页' : 'Home'}
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-steel-300">{lang === 'zh' ? '产品目录' : 'Product Catalogue'}</span>
+          <span className="text-steel-700">{lang === 'zh' ? '产品目录' : 'Product Catalogue'}</span>
         </nav>
 
         <div
@@ -93,10 +93,10 @@ export default function Products() {
           }`}
         >
           <span className="text-xs tracking-[0.2em] uppercase text-ember-400 font-500">Products</span>
-          <h1 className="mt-4 font-display text-4xl sm:text-5xl font-700 tracking-tight text-white">
+          <h1 className="mt-4 font-display text-4xl sm:text-5xl font-700 tracking-tight text-ink-900">
             {lang === 'zh' ? '产品目录' : 'Product Catalogue'}
           </h1>
-          <p className="mt-5 text-lg text-steel-300 leading-relaxed">
+          <p className="mt-5 text-lg text-steel-700 leading-relaxed">
             {lang === 'zh'
               ? '五大手套品类，覆盖一次性无粉、乳胶、时款、劳动与运动防护，满足不同行业与环境的需求。'
               : 'Five glove categories covering disposable powder-free, latex, fashion, work and sports protection — meeting the demands of diverse industries and environments.'}
@@ -141,13 +141,13 @@ export default function Products() {
           })}
         </div>
 
-        <div className="border-t border-white/5 pt-16">
+        <div className="border-t border-ink-200 pt-16">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
             <div>
               <span className="text-xs tracking-[0.2em] uppercase text-ember-400 font-500">
                 {lang === 'zh' ? '产品目录' : 'Product Catalogue'}
               </span>
-              <h2 className="mt-3 font-display text-3xl sm:text-4xl font-700 tracking-tight text-white">
+              <h2 className="mt-3 font-display text-3xl sm:text-4xl font-700 tracking-tight text-ink-900">
                 {lang === 'zh' ? `${products.length || 30} 款产品` : `${products.length || 30} Products`}
               </h2>
             </div>
@@ -164,7 +164,7 @@ export default function Products() {
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 placeholder={lang === 'zh' ? '搜索产品名称、SKU或描述' : 'Search by name, SKU or description'}
-                className="w-full rounded-xl bg-ink-800/70 border border-white/10 pl-11 pr-4 py-3 text-sm text-white placeholder:text-steel-600 outline-none focus:border-ember-500/50 transition-colors"
+                className="w-full rounded-xl bg-white border border-ink-200 pl-11 pr-4 py-3 text-sm text-ink-900 placeholder:text-steel-500 outline-none focus:border-ember-500/50 transition-colors"
               />
             </label>
             <div className="flex items-center gap-2 min-w-0">
@@ -172,7 +172,7 @@ export default function Products() {
               <select
                 value={selectedCategory}
                 onChange={(event) => setSelectedCategory(event.target.value)}
-                className="w-full md:w-56 rounded-xl bg-ink-800/70 border border-white/10 px-4 py-3 text-sm text-white outline-none focus:border-ember-500/50 transition-colors"
+                className="w-full md:w-56 rounded-xl bg-white border border-ink-200 px-4 py-3 text-sm text-ink-900 outline-none focus:border-ember-500/50 transition-colors"
               >
                 <option value="all">{lang === 'zh' ? '全部类别' : 'All Categories'}</option>
                 {Object.keys(categoryLabels).map((category) => (

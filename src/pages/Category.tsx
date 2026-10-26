@@ -62,7 +62,7 @@ export default function Category() {
   if (!cat) {
     return (
       <div className="pt-24 max-w-4xl mx-auto px-6 py-24 text-center">
-        <h1 className="font-display text-3xl font-700 text-white mb-4">
+        <h1 className="font-display text-3xl font-700 text-ink-900 mb-4">
           {lang === 'zh' ? '未找到该品类' : 'Category Not Found'}
         </h1>
         <Link to="/products" className="text-ember-400 hover:text-ember-300 transition-colors">
@@ -76,15 +76,15 @@ export default function Category() {
     <div className="pt-24">
       <section className="max-w-4xl mx-auto px-6 py-12">
         <nav className="flex items-center gap-2 text-sm text-steel-500 mb-8 flex-wrap">
-          <Link to="/" className="hover:text-white transition-colors">
+          <Link to="/" className="hover:text-ember-600 transition-colors">
             {lang === 'zh' ? '首页' : 'Home'}
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <Link to="/products" className="hover:text-white transition-colors">
+          <Link to="/products" className="hover:text-ember-600 transition-colors">
             {lang === 'zh' ? '产品' : 'Products'}
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-steel-300">{lang === 'zh' ? cat.labelZh : cat.labelEn}</span>
+          <span className="text-steel-700">{lang === 'zh' ? cat.labelZh : cat.labelEn}</span>
         </nav>
 
         <div
@@ -96,7 +96,7 @@ export default function Category() {
           <span className="text-xs tracking-[0.2em] uppercase text-ember-400 font-500">
             {cat.labelEn}
           </span>
-          <h1 className="mt-4 font-display text-4xl sm:text-5xl font-700 tracking-tight text-white">
+          <h1 className="mt-4 font-display text-4xl sm:text-5xl font-700 tracking-tight text-ink-900">
             {lang === 'zh' ? cat.labelZh : cat.labelEn}
           </h1>
         </div>
@@ -115,18 +115,18 @@ export default function Category() {
         </div>
 
         <p
-          className={`text-base sm:text-lg text-steel-200 leading-[1.85] transition-all duration-700 ${
+          className={`text-base sm:text-lg text-steel-700 leading-[1.85] transition-all duration-700 ${
             shown ? 'opacity-100' : 'opacity-0'
           }`}
         >
           {lang === 'zh' ? cat.description.zh : cat.description.en}
         </p>
 
-        <div className="mt-16 pt-10 border-t border-white/5">
+        <div className="mt-16 pt-10 border-t border-ink-200">
           <div className="flex items-center justify-between gap-4 mb-6">
             <div>
               <span className="text-xs tracking-[0.2em] uppercase text-ember-400 font-500">Product Catalogue</span>
-              <h2 className="mt-2 font-display text-3xl font-700 text-white">
+              <h2 className="mt-2 font-display text-3xl font-700 text-ink-900">
                 {lang === 'zh' ? `${products.length} 件产品` : `${products.length} Products`}
               </h2>
             </div>
@@ -159,7 +159,7 @@ export default function Category() {
           )}
         </div>
 
-        <div className="mt-16 pt-10 border-t border-white/5">
+        <div className="mt-16 pt-10 border-t border-ink-200">
           <h2 className="text-sm uppercase tracking-wider text-steel-500 mb-5">
             {lang === 'zh' ? '其他品类' : 'Other Categories'}
           </h2>
