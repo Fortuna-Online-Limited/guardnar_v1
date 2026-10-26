@@ -37,17 +37,17 @@ function ProductView({ product, lang }: { product: Product; lang: 'zh' | 'en' })
     <div className="pt-24">
       <section className="max-w-6xl mx-auto px-6 py-12">
         <nav className="flex items-center gap-2 text-sm text-steel-500 mb-8 flex-wrap">
-          <Link to="/" className="hover:text-white transition-colors">
+          <Link to="/" className="hover:text-ember-600 transition-colors">
             {lang === 'zh' ? '首页' : 'Home'}
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <Link to="/products" className="hover:text-white transition-colors">
+          <Link to="/products" className="hover:text-ember-600 transition-colors">
             {lang === 'zh' ? '产品目录' : 'Products'}
           </Link>
           {cat && (
             <>
               <ChevronRight className="h-3.5 w-3.5" />
-              <Link to={`/category/${cat.slug}`} className="hover:text-white transition-colors">
+              <Link to={`/category/${cat.slug}`} className="hover:text-ember-600 transition-colors">
                 {lang === 'zh' ? cat.zh : cat.en}
               </Link>
             </>
@@ -58,7 +58,7 @@ function ProductView({ product, lang }: { product: Product; lang: 'zh' | 'en' })
 
         <Link
           to={cat ? `/category/${cat.slug}` : '/products'}
-          className="inline-flex items-center gap-2 text-sm text-steel-400 hover:text-white transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-sm text-steel-600 hover:text-ember-600 transition-colors mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
           {lang === 'zh' ? '返回列表' : 'Back to list'}
@@ -95,7 +95,7 @@ function ProductView({ product, lang }: { product: Product; lang: 'zh' | 'en' })
                 {lang === 'zh' ? cat.zh : cat.en}
               </span>
             )}
-            <h1 className="mt-4 font-display text-3xl sm:text-4xl font-700 tracking-tight text-white leading-tight">
+            <h1 className="mt-4 font-display text-3xl sm:text-4xl font-700 tracking-tight text-ink-900 leading-tight">
               {product.title}
             </h1>
 
@@ -143,7 +143,7 @@ function ProductView({ product, lang }: { product: Product; lang: 'zh' | 'en' })
               {cat && (
                 <Link
                   to={`/category/${cat.slug}`}
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-6 py-3 text-sm text-steel-200 hover:border-ember-500/30 hover:text-white transition-all"
+                  className="inline-flex items-center gap-2 rounded-xl border border-ink-200 px-6 py-3 text-sm text-ink-700 hover:border-ember-500/50 hover:text-ink-900 transition-all"
                 >
                   <Warehouse className="h-4 w-4" />
                   {lang === 'zh' ? `查看更多${cat.zh}` : `More ${cat.en}`}
@@ -218,7 +218,7 @@ export default function ProductDetail() {
     return (
       <div className="pt-24">
         <section className="max-w-4xl mx-auto px-6 py-24 text-center">
-          <h1 className="font-display text-3xl font-700 text-white mb-4">
+          <h1 className="font-display text-3xl font-700 text-ink-900 mb-4">
             {lang === 'zh' ? '未找到该产品' : 'Product Not Found'}
           </h1>
           <Link to="/products" className="text-ember-400 hover:text-ember-300 transition-colors">
